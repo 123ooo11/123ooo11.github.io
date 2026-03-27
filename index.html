@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>海南椰雕 - 国家级非物质文化遗产</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", sans-serif;
+        }
+
+        body {
+            background-color: #f8f5f0;
+            color: #333;
+            line-height: 1.8;
+            padding-bottom: 0;
+        }
+
+        /* 顶部导航栏（木头色主题） */
+        header {
+            background-color: #8B5A2B;
+            color: white;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #ffd700;
+        }
+
+        /* 顶部轮播图样式 */
+        .top-banner {
+            position: relative;
+            height: 40vh;
+            overflow: hidden;
+        }
+
+        .banner-carousel {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .carousel-item {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .carousel-item.active {
+            opacity: 1;
+        }
+
+        .carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .banner-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            text-align: center;
+            text-shadow: 0 3px 10px rgba(0,0,0,0.7);
+            z-index: 10;
+        }
+
+        .banner-text h2 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .banner-text p {
+            font-size: 1.2rem;
+        }
+
+        .carousel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.5);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 10;
+            transition: background 0.3s;
+        }
+
+        .carousel-arrow:hover {
+            background: rgba(0,0,0,0.7);
+        }
+
+        .prev-arrow {
+            left: 2rem;
+        }
+
+        .next-arrow {
+            right: 2rem;
+        }
+
+        /* 内容容器 */
+        .content-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .page-section {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+            margin-bottom: 4rem;
+        }
+
+        .page-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-title {
+            color: #8B5A2B;
+            font-size: 2.2rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #8B5A2B;
+        }
+
+        /* --- 首页左右排版 --- */
+        .team-intro {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            margin-bottom: 4rem;
+        }
+        .team-logo {
+            width: 100%;
+            border-radius: 10px;
+        }
+        .team-desc h3 {
+            color: #8B5A2B;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+        .team-desc p {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+        .more-btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            border: 1px solid #8B5A2B;
+            color: #8B5A2B;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+        .more-btn:hover {
+            background-color: #8B5A2B;
+            color: white;
+        }
+
+        .process-flow {
+            margin-bottom: 4rem;
+        }
+        .flow-steps {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .flow-step {
+            flex: 1;
+            min-width: 120px;
+            transition: transform 0.3s;
+        }
+        .flow-step:hover {
+            transform: translateY(-5px);
+        }
+        .step-icon {
+            width: 80px;
+            height: 80px;
+            background-color: #b0b7bc;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: bold;
+            clip-path: polygon(50% 0%, 100% 35%, 100% 75%, 50% 100%, 0% 75%, 0% 35%);
+            transition: background-color 0.3s;
+        }
+        .flow-step:hover .step-icon {
+            background-color: #8B5A2B;
+        }
+        .step-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        .step-desc {
+            font-size: 0.95rem;
+            color: #666;
+        }
+        .flow-arrow {
+            color: #8B5A2B;
+            font-size: 1.5rem;
+        }
+
+        .advantages {
+            margin-bottom: 4rem;
+        }
+        .adv-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        .adv-subtitle {
+            text-align: center;
+            font-size: 1.8rem;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+        .adv-intro {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 3rem;
+        }
+        .adv-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            text-align: center;
+        }
+        .adv-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+        .adv-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        .adv-num {
+            width: 60px;
+            height: 60px;
+            background-color: #b0b7bc;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .adv-item:hover .adv-num {
+            background-color: #8B5A2B;
+        }
+        .adv-item h4 {
+            color: #8B5A2B;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+        .adv-item p {
+            font-size: 0.95rem;
+            color: #666;
+        }
+        .adv-showcase {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 3rem;
+            gap: 2rem;
+        }
+        .adv-showcase img {
+            width: 30%;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        .adv-showcase img:hover {
+            transform: scale(1.05);
+        }
+
+        /* --- 关于我们模块样式 --- */
+        .about-us {
+            margin-bottom: 4rem;
+        }
+        .about-desc {
+            margin-bottom: 2rem;
+        }
+        .about-desc h4 {
+            color: #8B5A2B;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        .about-desc p {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+        .about-pics {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        .about-pics img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        .about-pics img:hover {
+            transform: scale(1.03);
+        }
+        /* --- 团队文化：文字和图片左右分布 --- */
+        .team-culture {
+            margin-bottom: 3rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+        .culture-text h4 {
+            color: #8B5A2B;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        .culture-img img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        .activity-style {
+            margin-bottom: 3rem;
+        }
+        .activity-pics {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        .activity-pics img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        .activity-pics img:hover {
+            transform: scale(1.03);
+        }
+        .activity-subtitle {
+            text-align: center;
+            font-size: 1.5rem;
+            color: #666;
+        }
+        .student-works-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        .student-work-item {
+            text-align: center;
+        }
+        .student-work-item img {
+            width: 100%;
+            aspect-ratio: 1/1;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        /* --- 非遗文创侧边栏+产品网格 --- */
+        .creative-container {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 2rem;
+        }
+        .creative-sidebar {
+            background: #f5f5f5;
+        }
+        .sidebar-item {
+            padding: 1rem;
+            border-bottom: 1px solid #ddd;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .sidebar-item.active {
+            background: #333;
+            color: white;
+        }
+        .creative-content {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        .creative-content.hollow {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        .creative-content.lamp {
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: auto auto;
+        }
+        .creative-item {
+            text-align: center;
+        }
+        .creative-item img {
+            width: 100%;
+            aspect-ratio: 1/1;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        /* --- 文化互动：标签页切换 --- */
+        .interact-container {
+            background: white;
+            border-radius: 15px;
+            padding: 2.5rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        .interact-tabs {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #8B5A2B;
+        }
+        .interact-tab {
+            padding: 0.5rem 1rem;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: #333;
+            border-bottom: 3px solid transparent;
+        }
+        .interact-tab.active {
+            color: #8B5A2B;
+            border-bottom: 3px solid #8B5A2B;
+            font-weight: bold;
+        }
+        .interact-panel {
+            display: none;
+        }
+        .interact-panel.active {
+            display: block;
+        }
+
+        /* --- 雕刻过程：一步一张图 --- */
+        .carving-animation {
+            width: 100%;
+            background: #fdf8f3;
+            border-radius: 10px;
+            border: 2px solid #8B5A2B;
+            padding: 2rem;
+            text-align: center;
+        }
+        .carving-animation img {
+            width: 400px;
+            aspect-ratio: 1/1;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        .carving-text {
+            font-size: 1.2rem;
+            color: #8B5A2B;
+            font-weight: bold;
+            margin-top: 1rem;
+        }
+        .carving-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .carving-btn {
+            padding: 0.6rem 1.5rem;
+            background: #8B5A2B;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+        }
+
+        /* --- 知识问答 --- */
+        .quiz-item {
+            padding: 1.5rem;
+            background: #fdf8f3;
+            border-left: 4px solid #8B5A2B;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+        .quiz-item h3 {
+            margin-bottom: 1rem;
+            color: #8B5A2B;
+        }
+        .options {
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            gap: 1rem;
+        }
+        .option {
+            padding: 0.8rem;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: center;
+        }
+        .option.correct {
+            background: #d4edda;
+            border-color: #28a745;
+            color: #155724;
+        }
+        .option.wrong {
+            background: #f8d7da;
+            border-color: #dc3545;
+            color: #721c24;
+        }
+        #quiz-result {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #8B5A2B;
+            margin-top: 1rem;
+            font-weight: bold;
+        }
+
+        /* --- 联系我们 --- */
+        .contact-us {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        .contact-info p {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+        .contact-info strong {
+            color: #8B5A2B;
+        }
+        .contact-map {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        /* --- 底部 --- */
+        .bottom-bar {
+            background-color: #222;
+            color: #ccc;
+            padding: 2rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .bottom-left {
+            font-size: 1.1rem;
+        }
+        .bottom-right {
+            font-size: 1.1rem;
+            text-align: right;
+        }
+
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .creative-container { grid-template-columns: 1fr; }
+            .creative-content { grid-template-columns: repeat(2, 1fr); }
+            .creative-content.hollow { grid-template-columns: 1fr; }
+            .creative-content.lamp { grid-template-columns: repeat(2, 1fr); }
+            .team-culture { grid-template-columns: 1fr; }
+            .team-intro { grid-template-columns: 1fr; }
+            .bottom-bar { flex-direction: column; text-align: center; gap: 1rem; }
+            .bottom-right { text-align: center; }
+            .options { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="nav-container">
+        <div class="logo">海南椰雕</div>
+        <nav class="nav-links">
+            <a class="nav-link active" data-page="home">首页</a>
+            <a class="nav-link" data-page="about">关于我们</a>
+            <a class="nav-link" data-page="creative">椰雕产品</a>
+            <a class="nav-link" data-page="interact">文化互动</a>
+            <a class="nav-link" data-page="contact">联系我们</a>
+        </nav>
+    </div>
+</header>
+
+<section class="top-banner">
+    <div class="banner-carousel">
+        <div class="carousel-item active">
+            <img src="images/beijingyi.jpg" alt="海南椰雕">
+            <div class="banner-text">
+                <h2>海南椰雕 · 天南贡品</h2>
+                <p>2008年入选第二批国家级非物质文化遗产保护名录</p>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="images/beijinger.jpg" alt="椰雕工艺">
+            <div class="banner-text">
+                <h2>一刀一刻 · 雕琢椰韵</h2>
+                <p>经数十道工序，将椰壳化为艺术瑰宝</p>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="images/beijingsan.jpg" alt="椰雕文创">
+            <div class="banner-text">
+                <h2>非遗新生 · 椰风焕彩</h2>
+                <p>传统工艺与现代生活的完美融合</p>
+            </div>
+        </div>
+    </div>
+    <button class="carousel-arrow prev-arrow" onclick="prevSlide()">&lt;</button>
+    <button class="carousel-arrow next-arrow" onclick="nextSlide()">&gt;</button>
+</section>
+
+<div class="content-container">
+    <!-- 首页 -->
+    <section id="home" class="page-section active">
+        <h2 class="section-title">首页</h2>
+        <div class="team-intro">
+            <img src="images/tubiao.png" alt="非遗·椰雕" class="team-logo">
+            <div class="team-desc">
+                <h3>关于我们 团队介绍</h3>
+                <p><strong>椰梦工匠队介绍：</strong><br>
+                一个集设计、制作，售卖于一体的椰雕团队。本成员由海南大学俄语专业、计算机专业、会计学专业的优秀学生、校内专业优秀的教师以及在学校外聘请的专业椰雕老师组成，实现了跨专业，学科融合，学科交叉，他们在各自的领域具有丰富的研究经验和专业知识。</p>
+                <p><strong>椰雕团队宗旨：</strong><br>
+                传承匠心技艺，创新非遗文化。以椰雕艺术为载体，融合现代设计与科技，让传统工艺焕发新生。我们致力于打造高品质椰雕作品，弘扬民族文化，让世界看到东方手工艺的独特魅力。</p>
+                <a href="#" class="more-btn">MORE+</a>
+            </div>
+        </div>
+
+        <div class="process-flow">
+            <h2 class="section-title">产品设计流程</h2>
+            <div class="flow-steps">
+                <div class="flow-step">
+                    <div class="step-icon">提出<br>诉求</div>
+                    <p class="step-desc">通过电话联系我们<br>告诉我们您的需求</p>
+                </div>
+                <span class="flow-arrow">></span>
+                <div class="flow-step">
+                    <div class="step-icon">设计<br>方案</div>
+                    <p class="step-desc">根据客户需求资料<br>设计椰雕效果图片</p>
+                </div>
+                <span class="flow-arrow">></span>
+                <div class="flow-step">
+                    <div class="step-icon">修改<br>建议</div>
+                    <p class="step-desc">对提出意见或建议<br>进行椰雕设计修改</p>
+                </div>
+                <span class="flow-arrow">></span>
+                <div class="flow-step">
+                    <div class="step-icon">作品<br>制作</div>
+                    <p class="step-desc">对通过审核的小样<br>放大创作椰雕成品</p>
+                </div>
+                <span class="flow-arrow">></span>
+                <div class="flow-step">
+                    <div class="step-icon">运输<br>产品</div>
+                    <p class="step-desc">将椰雕作品运送到<br>客户的指定位置</p>
+                </div>
+                <span class="flow-arrow">></span>
+                <div class="flow-step">
+                    <div class="step-icon">后期<br>维护</div>
+                    <p class="step-desc">在售后的保修期内<br>进行椰雕作品维护</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="advantages">
+            <h2 class="adv-title">选择我们的 <span style="font-size: 4rem; color: #333;">4</span> 大优势</h2>
+            <p class="adv-subtitle">CHOOSE OUR FOUR ADVANTAGES</p>
+            <p class="adv-intro">团队长期禀承“以人为本，以质量为生存之道”的经营理念，以“优质作品”的生产理念，降低生产成本，提高产品质量，真正做到物美价廉，满足客户需求，从客户出发，为客户着想，技师团队全程指导，严谨的态度对每个产品质量严格把关。</p>
+            <div class="adv-grid">
+                <div class="adv-item">
+                    <div class="adv-num">01</div>
+                    <h4>数年雕刻经验</h4>
+                    <p>与资深经验的椰雕传承人合作出品，致力于椰雕艺术品的新工艺不断创新，设计理念遵循传统工艺与科技创新的结合。</p>
+                </div>
+                <div class="adv-item">
+                    <div class="adv-num" style="background-color: #c9a692;">02</div>
+                    <h4>用心的椰梦工匠队</h4>
+                    <p>真心喜爱椰雕文化，用心打磨椰雕技术，细心照顾用户需求。</p>
+                </div>
+                <div class="adv-item">
+                    <div class="adv-num" style="background-color: #a1b5c1;">03</div>
+                    <h4>精湛的雕塑工艺</h4>
+                    <p>董老师经多年努力，研发出了椰雕通花创新技艺，并用该技艺生产制作出椰雕通花系列创新工艺品，制作出来的椰雕产品造型丰满逼真，纹路清晰细腻，神形栩栩如生。纯手工艺椰雕更具人情温度</p>
+                </div>
+                <div class="adv-item">
+                    <div class="adv-num" style="background-color: #b8b9c3;">04</div>
+                    <h4>完善的售后服务</h4>
+                    <p>完善的售后服务，让您下单无忧，定制无忧，质量无忧，让您省心省力。</p>
+                </div>
+            </div>
+            <div class="adv-showcase">
+                <img src="images/tuyi.png" alt="椰雕作品1">
+                <img src="images/tuer.png" alt="椰雕作品2">
+                <img src="images/tusan.png" alt="椰雕作品3">
+            </div>
+        </div>
+    </section>
+
+    <!-- 关于我们 -->
+    <section id="about" class="page-section">
+        <h2 class="section-title">关于我们 ABOUT US</h2>
+        <div class="about-us">
+            <div class="about-desc">
+                <h4>椰梦工匠队介绍：</h4>
+                <p>一个集设计、制作，售卖于一体的椰雕团队。本成员由海南大学俄语专业、计算机专业、会计学专业的优秀学生、校内专业优秀的教师以及在学校外聘请的专业椰雕老师组成，实现了跨专业，学科融合，学科交叉，他们在各自的领域具有丰富的研究经验和专业知识。</p>
+                <h4>椰雕团队宗旨：</h4>
+                <p>传承匠心技艺，创新非遗文化。以椰雕艺术为载体，融合现代设计与科技，让传统工艺焕发新生。我们致力于打造高品质椰雕作品，弘扬民族文化，让世界看到东方手工艺的独特魅力。</p>
+            </div>
+            <div class="about-pics">
+                <img src="images/tuanduiyi.png" alt="椰雕活动现场">
+                <img src="images/tuanduier.png" alt="团队合影">
+            </div>
+
+            <!-- 团队文化：左右分布 -->
+            <div class="team-culture">
+                <div class="culture-text">
+                    <h2 class="section-title" style="text-align: left; border-bottom: none; padding-bottom: 0; margin-bottom: 1rem;">团队文化 TEAM CULTURE</h2>
+                    <div class="culture-item">
+                        <h4>经营理念：</h4>
+                        <p>诚信为本、关注客户、注重细节。</p>
+                    </div>
+                    <div class="culture-item">
+                        <h4>发展理念：</h4>
+                        <p>用创新、品质、服务立足于市场。</p>
+                    </div>
+                    <div class="culture-item">
+                        <h4>服务理念：</h4>
+                        <p>客户的满意就是我们工作的目标</p>
+                    </div>
+                    <div class="culture-item">
+                        <h4>企业口号：</h4>
+                        <p>细微之处，凸显神工，气质雕塑，从我们开始！</p>
+                    </div>
+                    <div class="culture-item">
+                        <h4>管理理念：</h4>
+                        <p>建立团队，打造创新型团队，创建以顾客为导向的学习型团队。</p>
+                    </div>
+                </div>
+                <div class="culture-img">
+                    <img src="images/tuanduisan.png" alt="椰雕店铺">
+                </div>
+            </div>
+
+            <div class="activity-style">
+                <h2 class="section-title">活动风采 ACTIVITY STYLE</h2>
+                <div class="activity-pics">
+                    <img src="images/ketangyi.png" alt="活动合影1">
+                    <img src="images/ketanger.png" alt="活动合影2">
+                </div>
+                <p class="activity-subtitle">非遗椰雕走进大学课堂</p>
+                <div class="student-works-row">
+                    <div class="student-work-item">
+                        <img src="images/zuopinyi.png" alt="学生作品1">
+                    </div>
+                    <div class="student-work-item">
+                        <img src="images/zuopiner.png" alt="学生作品2">
+                    </div>
+                    <div class="student-work-item">
+                        <img src="images/zuopinsan.png" alt="学生作品3">
+                    </div>
+                    <div class="student-work-item">
+                        <img src="images/zuopinsi.png" alt="学生作品4">
+                    </div>
+                </div>
+                <p class="activity-subtitle" style="margin-top: 1rem;">非遗椰雕课堂学生作品展示</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 非遗文创 -->
+    <section id="creative" class="page-section">
+        <h2 class="section-title">椰雕产品</h2>
+        <div class="creative-container">
+            <div class="creative-sidebar">
+                <div class="sidebar-item active" data-type="normal">普通椰雕系列</div>
+                <div class="sidebar-item" data-type="penholder">笔筒椰雕系列</div>
+                <div class="sidebar-item" data-type="hollow">镂空椰雕系列</div>
+                <div class="sidebar-item" data-type="lamp">台灯椰雕系列</div>
+            </div>
+            <div class="creative-content" id="creativeContent">
+                <!-- 普通椰雕系列 -->
+                <div class="creative-item" data-type="normal">
+                    <img src="images/huipin.png" alt="椰雕绘品">
+                </div>
+                <div class="creative-item" data-type="normal">
+                    <img src="images/wanju.png" alt="椰雕碗具">
+                </div>
+                <div class="creative-item" data-type="normal">
+                    <img src="images/baijian.png" alt="椰雕摆件">
+                </div>
+                <div class="creative-item" data-type="normal">
+                    <img src="images/zhanpin.png" alt="椰雕展品">
+                </div>
+
+                <!-- 笔筒椰雕系列：上三下三 -->
+                <div class="creative-item" data-type="penholder" style="display:none;">
+                    <img src="images/bitan1.png" alt="椰雕笔筒1">
+                </div>
+                <div class="creative-item" data-type="penholder" style="display:none;">
+                    <img src="images/bitan2.png" alt="椰雕笔筒2">
+                </div>
+                <div class="creative-item" data-type="penholder" style="display:none;">
+                    <img src="images/bitan3.png" alt="椰雕笔筒3">
+                </div>
+                <div class="creative-item" data-type="penholder" style="display:none;">
+                    <img src="images/bitan4.png" alt="椰雕笔筒4">
+                </div>
+                <div class="creative-item" data-type="penholder" style="display:none;">
+                    <img src="images/bitan5.png" alt="椰雕笔筒5">
+                </div>
+                <div class="creative-item" data-type="penholder" style="display:none;">
+                    <img src="images/bitan6.png" alt="椰雕笔筒6">
+                </div>
+
+                <!-- 镂空椰雕系列：横向2个 -->
+                <div class="creative-item" data-type="hollow" style="display:none;">
+                    <img src="images/loukong1.png" alt="镂空椰雕灯具底座">
+                </div>
+                <div class="creative-item" data-type="hollow" style="display:none;">
+                    <img src="images/loukong2.png" alt="镂空椰雕灯">
+                </div>
+
+                <!-- 台灯椰雕系列：上三下二 -->
+                <div class="creative-item" data-type="lamp" style="display:none;">
+                    <img src="images/taideng1.png" alt="椰雕台灯1">
+                </div>
+                <div class="creative-item" data-type="lamp" style="display:none;">
+                    <img src="images/taideng2.png" alt="椰雕台灯2">
+                </div>
+                <div class="creative-item" data-type="lamp" style="display:none;">
+                    <img src="images/taideng3.png" alt="椰雕台灯3">
+                </div>
+                <div class="creative-item" data-type="lamp" style="display:none; grid-column: 1 / 2;">
+                    <img src="images/taideng4.png" alt="椰雕台灯4">
+                </div>
+                <div class="creative-item" data-type="lamp" style="display:none; grid-column: 2 / 3;">
+                    <img src="images/taideng5.png" alt="椰雕台灯5">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 文化互动：雕刻过程 + 知识问答 -->
+    <section id="interact" class="page-section">
+        <h2 class="section-title">文化互动</h2>
+        <div class="interact-container">
+            <div class="interact-tabs">
+                <div class="interact-tab active" data-panel="carving">雕刻过程</div>
+                <div class="interact-tab" data-panel="quiz">知识问答</div>
+            </div>
+            
+            <!-- 雕刻过程面板 -->
+            <div class="interact-panel active" id="carving-panel">
+                <div class="carving-animation">
+                    <img id="carving-img" src="images/diaoke1.png" alt="雕刻过程">
+                    <div class="carving-text" id="carveTxt">第一步：切割椰壳</div>
+                </div>
+                <div class="carving-controls">
+                    <button class="carving-btn" onclick="prevCarve()">上一步</button>
+                    <button class="carving-btn" onclick="nextCarve()">下一步</button>
+                </div>
+            </div>
+            
+            <!-- 知识问答面板 -->
+            <div class="interact-panel" id="quiz-panel">
+                <div class="quiz-item">
+                    <h3>1. 海南椰雕被列入国家级非物质文化遗产的年份是？</h3>
+                    <div class="options">
+                        <div class="option" onclick="checkAnswer(this, true)">2008年</div>
+                        <div class="option" onclick="checkAnswer(this, false)">2010年</div>
+                        <div class="option" onclick="checkAnswer(this, false)">2012年</div>
+                    </div>
+                </div>
+                <div class="quiz-item">
+                    <h3>2. 海南椰雕最早作为贡品进献朝廷的朝代是？</h3>
+                    <div class="options">
+                        <div class="option" onclick="checkAnswer(this, true)">宋代</div>
+                        <div class="option" onclick="checkAnswer(this, false)">唐代</div>
+                        <div class="option" onclick="checkAnswer(this, false)">明代</div>
+                    </div>
+                </div>
+                <div class="quiz-item">
+                    <h3>3. 以下哪项不是椰雕的核心制作工序？</h3>
+                    <div class="options">
+                        <div class="option" onclick="checkAnswer(this, false)">雕刻</div>
+                        <div class="option" onclick="checkAnswer(this, true)">熔炼</div>
+                        <div class="option" onclick="checkAnswer(this, false)">打磨</div>
+                    </div>
+                </div>
+                <div class="quiz-item">
+                    <h3>4. 海南椰雕又被称为“天南贡品”，主要因为曾进献给哪个朝代的皇室？</h3>
+                    <div class="options">
+                        <div class="option" onclick="checkAnswer(this, true)">清代</div>
+                        <div class="option" onclick="checkAnswer(this, false)">元代</div>
+                        <div class="option" onclick="checkAnswer(this, false)">民国</div>
+                    </div>
+                </div>
+                <div class="quiz-item">
+                    <h3>5. 以下哪种椰雕技艺最能体现镂空通透的艺术效果？</h3>
+                    <div class="options">
+                        <div class="option" onclick="checkAnswer(this, true)">通花雕</div>
+                        <div class="option" onclick="checkAnswer(this, false)">浮雕</div>
+                        <div class="option" onclick="checkAnswer(this, false)">圆雕</div>
+                    </div>
+                </div>
+                <div id="quiz-result"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系我们 -->
+    <section id="contact" class="page-section">
+        <h2 class="section-title">联系我们 CONTACT US</h2>
+        <div class="contact-us">
+            <div class="contact-info">
+                <p><strong>联系QQ：</strong>2530757577</p>
+                <p><strong>手机号码：</strong>17569110536</p>
+                <p><strong>联系邮箱：</strong>2530757577@qq.com</p>
+                <p><strong>联系地址：</strong>海南省海口市美兰区人民路58号</p>
+            </div>
+            <img src="images/ditu.png" alt="地图" class="contact-map">
+        </div>
+    </section>
+</div>
+
+<!-- 底部 -->
+<div class="bottom-bar">
+    <div class="bottom-left">
+        <p><strong>椰雕：</strong>普通椰雕产品，镂空椰雕产品</p>
+        <p><strong>售后：</strong>完善的售后服务，让您下单无忧，定制无忧，质量无忧</p>
+    </div>
+    <div class="bottom-right">
+        <p><strong>Mail/邮箱：</strong>2530757577@qq.com</p>
+        <p><strong>Tel/联系电话：</strong>17569110536</p>
+        <p><strong>Address/地址：</strong>海南省海口市美兰区人民路58号</p>
+    </div>
+</div>
+
+<script>
+    // 页面切换
+    document.querySelectorAll('.nav-link').forEach(link=>{
+        link.onclick=()=>{
+            document.querySelectorAll('.page-section').forEach(s=>s.classList.remove('active'))
+            document.querySelectorAll('.nav-link').forEach(n=>n.classList.remove('active'))
+            link.classList.add('active')
+            document.getElementById(link.dataset.page).classList.add('active')
+        }
+    })
+
+    // 轮播
+    let s=0
+    const slides=document.querySelectorAll('.carousel-item')
+    function showSlide(i){
+        s=i<0?slides.length-1:i%slides.length
+        slides.forEach((el,idx)=>el.classList.toggle('active',idx===s))
+    }
+    setInterval(()=>showSlide(s+1),5000)
+    window.nextSlide=()=>showSlide(s+1)
+    window.prevSlide=()=>showSlide(s-1)
+
+    // 非遗文创侧边栏切换
+    document.querySelectorAll('.sidebar-item').forEach(item=>{
+        item.onclick=()=>{
+            document.querySelectorAll('.sidebar-item').forEach(i=>i.classList.remove('active'))
+            item.classList.add('active')
+            const type=item.dataset.type
+            const content=document.getElementById('creativeContent')
+            // 重置所有产品显示状态
+            document.querySelectorAll('.creative-item').forEach(el=>{
+                el.style.display=el.dataset.type===type?'block':'none'
+            })
+            // 切换网格布局
+            content.className='creative-content'
+            if(type==='hollow') content.classList.add('hollow')
+            if(type==='lamp') content.classList.add('lamp')
+        }
+    })
+
+    // 文化互动标签页切换
+    document.querySelectorAll('.interact-tab').forEach(tab=>{
+        tab.onclick=()=>{
+            document.querySelectorAll('.interact-tab').forEach(t=>t.classList.remove('active'))
+            tab.classList.add('active')
+            document.querySelectorAll('.interact-panel').forEach(p=>p.classList.remove('active'))
+            document.getElementById(t.dataset.dataset.panel+'-panel').classList.add('active')
+        }
+    })
+    // 修复标签页切换的JS
+    document.querySelectorAll('.interact-tab').forEach(tab => {
+        tab.onclick = () => {
+            document.querySelectorAll('.interact-tab').forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            document.querySelectorAll('.interact-panel').forEach(p => p.classList.remove('active'));
+            document.getElementById(tab.dataset.panel + '-panel').classList.add('active');
+        };
+    });
+
+    // 雕刻步骤：一步一张图切换
+    let cv=1
+    const txts=['第一步：切割椰壳','第二步：打磨平整','第三步：绘制图案','第四步：完成雕刻']
+    const imgs=['images/diaoke1.png','images/diaoke2.png','images/diaoke3.png','images/diaoke4.png']
+    window.nextCarve=()=>{
+        cv=cv>=4?1:cv+1
+        updateCarve()
+    }
+    window.prevCarve=()=>{
+        cv=cv<=1?4:cv-1
+        updateCarve()
+    }
+    function updateCarve(){
+        document.getElementById('carveTxt').textContent=txts[cv-1]
+        document.getElementById('carving-img').src=imgs[cv-1]
+    }
+
+    // 知识问答
+    let correctCount=0
+    window.checkAnswer=(el, isCorrect)=>{
+        if(el.classList.contains('correct')||el.classList.contains('wrong')) return
+        if(isCorrect){
+            el.classList.add('correct')
+            correctCount++
+        }else{
+            el.classList.add('wrong')
+        }
+        if(document.querySelectorAll('.option.correct,.option.wrong').length===15){
+            document.getElementById('quiz-result').textContent=`你答对了 ${correctCount}/5 题！`
+        }
+    }
+</script>
+</body>
+</html>
